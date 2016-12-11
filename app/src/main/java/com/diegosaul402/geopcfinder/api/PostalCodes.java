@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PostalCodes {
     private int count;
-    private List<PostalCode> results;
+    private List<PostalCode> postalCodes;
 
     public int getCount() {
         return count;
@@ -20,11 +20,11 @@ public class PostalCodes {
         this.count = count;
     }
 
-    public List<PostalCode> getResults() {
-        return results;
+    public List<PostalCode> getPostalCodes() {
+        return postalCodes;
     }
 
-    public void setResults(List<PostalCode> results) {
-        this.results = results;
+    public void setPostalCodes(List<PostalCode> postalCodes) {
+        this.postalCodes = postalCodes;
     }
 }
