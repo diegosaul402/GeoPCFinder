@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.diegosaul402.geopcfinder.api.GeoAPIClient;
 import com.diegosaul402.geopcfinder.api.GeoAPIService;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     GeoAPIService geoAPIService;
     @Bind(R.id.button)
     Button button;
+    @Bind(R.id.editTextInput)
+    EditText editTextInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +43,16 @@ public class MainActivity extends AppCompatActivity {
         fragmentListener = detailsFragment;
         fragmentListener.initList();
     }
+
     @OnClick(R.id.button)
-    public void handleClick(){
-        Call<PostalCodes> call = geoAPIService.ListPostalCodes("postalCodeSearchJSON","36680","MX","10","diego_402");
+    public void handleClick() {
+        Call<PostalCodes> call = geoAPIService.ListPostalCodes("postalCodeSearchJSON", editTextInput.getText().toString(), "MX", "10", "diego_402");
         //Call<PostalCodes> call = geoAPIService.ListPostalTest();
 
         call.enqueue(new Callback<PostalCodes>() {
             @Override
             public void onResponse(Call<PostalCodes> call, Response<PostalCodes> response) {
+                fragmentListener.clearList();
                 PostalCodes postalResponse = response.body();
                 int size = postalResponse.getPostalCodes().size();
 

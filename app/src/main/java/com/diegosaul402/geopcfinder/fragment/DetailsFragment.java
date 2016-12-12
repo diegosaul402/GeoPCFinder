@@ -1,6 +1,8 @@
 package com.diegosaul402.geopcfinder.fragment;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -71,6 +73,13 @@ public class DetailsFragment extends Fragment implements DetailsFragmentListener
 
     @Override
     public void onItemClick(PostalCode postalCode) {
+        // Creates an Intent that will load a map of San Francisco
+        String colonia = postalCode.getPlaceName().replace(" ", "+");
+        String uri = "geo:" + Double.toString(postalCode.getLat()) + "," + Double.toString(postalCode.getLng()) + "?z=12&q=" + colonia;
+        Uri gmmIntentUri = Uri.parse(uri);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
 
     }
 
