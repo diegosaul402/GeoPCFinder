@@ -52,6 +52,5 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("Error", "Something went wrong" + t.getMessage());
             }
         });
-
     }
 }
