@@ -75,7 +75,7 @@ public class DetailsFragment extends Fragment implements DetailsFragmentListener
     public void onItemClick(PostalCode postalCode) {
         // Creates an Intent that will load a map of San Francisco
         String colonia = postalCode.getPlaceName().replace(" ", "+");
-        String uri = "geo:" + Double.toString(postalCode.getLat()) + "," + Double.toString(postalCode.getLng()) + "?z=12&q=" + colonia;
+        String uri = "geo:" + Double.toString(postalCode.getLat()) + "," + Double.toString(postalCode.getLng()) + "?z=11&q=" + colonia;
         Uri gmmIntentUri = Uri.parse(uri);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");

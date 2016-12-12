@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     public void handleClick() {
         String CP = editTextInput.getText().toString();
         if(!CP.isEmpty()) {
-            Call<PostalCodes> call = geoAPIService.ListPostalCodes("postalCodeSearchJSON", CP, "MX", "10", "diego_402");
+            Call<PostalCodes> call = geoAPIService.ListPostalCodes("postalCodeSearchJSON", CP, "MX", "20", "diego_402");
             //Call<PostalCodes> call = geoAPIService.ListPostalTest();
 
             call.enqueue(new Callback<PostalCodes>() {
@@ -89,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
 
                     for (int i = 0; i < size; i++) {
                         fragmentListener.addToList(postalResponse.getPostalCodes().get(i));
-                        Log.v("Colonia", postalResponse.getPostalCodes().get(i).getPlaceName());
-                        Log.v("CP", postalResponse.getPostalCodes().get(i).getPostalCode());
                     }
                 }
 
