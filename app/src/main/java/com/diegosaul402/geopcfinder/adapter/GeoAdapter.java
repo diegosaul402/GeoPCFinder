@@ -52,7 +52,7 @@ public class GeoAdapter extends RecyclerView.Adapter<GeoAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         PostalCode element = geoList.get(position);
 
-        String colonia = element.getPlaceName();
+        String colonia = element.getPostalCode() + ": " + element.getPlaceName() + ", " + element.getAdminName2() + ", " + element.getAdminName1()  + ", " + element.getCountryCode();
         holder.textResult.setText(colonia);
         holder.setOnItemClickListener(element, onItemClickListener);
     }
