@@ -27,7 +27,8 @@
         android:ems="10"
         android:id="@+id/editTextInput"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:imeOptions="actionSearch"/>
 
     <Button
         android:text="Search"

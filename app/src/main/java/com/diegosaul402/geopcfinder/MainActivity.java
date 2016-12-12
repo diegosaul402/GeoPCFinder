@@ -1,11 +1,14 @@
 package com.diegosaul402.geopcfinder;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -72,27 +75,42 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.button)
     public void handleClick() {
-        Call<PostalCodes> call = geoAPIService.ListPostalCodes("postalCodeSearchJSON", editTextInput.getText().toString(), "MX", "10", "diego_402");
-        //Call<PostalCodes> call = geoAPIService.ListPostalTest();
+        String CP = editTextInput.getText().toString();
+        if(!CP.isEmpty()) {
+            Call<PostalCodes> call = geoAPIService.ListPostalCodes("postalCodeSearchJSON", CP, "MX", "10", "diego_402");
+            //Call<PostalCodes> call = geoAPIService.ListPostalTest();
 
-        call.enqueue(new Callback<PostalCodes>() {
-            @Override
-            public void onResponse(Call<PostalCodes> call, Response<PostalCodes> response) {
-                fragmentListener.clearList();
-                PostalCodes postalResponse = response.body();
-                int size = postalResponse.getPostalCodes().size();
+            call.enqueue(new Callback<PostalCodes>() {
+                @Override
+                public void onResponse(Call<PostalCodes> call, Response<PostalCodes> response) {
+                    fragmentListener.clearList();
+                    PostalCodes postalResponse = response.body();
+                    int size = postalResponse.getPostalCodes().size();
 
-                for (int i = 0; i < size; i++) {
-                    fragmentListener.addToList(postalResponse.getPostalCodes().get(i));
-                    Log.v("Colonia", postalResponse.getPostalCodes().get(i).getPlaceName());
-                    Log.v("CP", postalResponse.getPostalCodes().get(i).getPostalCode());
+                    for (int i = 0; i < size; i++) {
+                        fragmentListener.addToList(postalResponse.getPostalCodes().get(i));
+                        Log.v("Colonia", postalResponse.getPostalCodes().get(i).getPlaceName());
+                        Log.v("CP", postalResponse.getPostalCodes().get(i).getPostalCode());
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<PostalCodes> call, Throwable t) {
-                Log.e("Error", "Something went wrong" + t.getMessage());
-            }
-        });
+                @Override
+                public void onFailure(Call<PostalCodes> call, Throwable t) {
+                    Log.e("Error", "Something went wrong" + t.getMessage());
+                }
+            });
+            hideKeyboard();
+        }
+        else{
+            editTextInput.setError("Campo requerido");
+        }
+    }
+
+    public void hideKeyboard(){
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
