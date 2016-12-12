@@ -13,6 +13,8 @@ https://youtu.be/J4e6TpEDQAo
 ![alt text](capturas/04.png " ")
 ![alt text](capturas/05.png " ")
 ###También podemos obsrvar que la caja de texto no perminte hacer una búsqueda si está vacía.
-![alt text](capturas/05.png " ")
+![alt text](capturas/07.png " ")
 ###En el menú superior encontramos la opción "About" que muestra mi información personal en una actividad flotante.
 ![alt text](capturas/06.png " ")
+###Créditos
+![alt text](capturas/08.png " ")
